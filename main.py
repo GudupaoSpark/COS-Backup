@@ -28,9 +28,9 @@ Copyright (c) 2024 Gudupao
         os._exit(1)
     
     if not c[2]:
-        base.log("缺少运行时文件 ac.json 正在自动创建 ",2)
-        config.write({"old_hash":""},"ac.json")
-        base.log("已创建 ac.json ",0)
+        base.log("缺少运行时文件 auto.json 正在自动创建 ",2)
+        config.write({"old_hash":"", "old_time":0},"auto.json")
+        base.log("已创建 auto.json ",0)
     else:
         base.log("运行时文件正常！",1)
     
@@ -49,6 +49,18 @@ Copyright (c) 2024 Gudupao
         os._exit(0)
     
     base.log("正常模式",1)
-    ot = time.time()
+    ws = base.dict_to_seconds(cf["time"])
+    
+    while True:
+        ot = config.read("auto.json")
+        if time.time() - ot["old_time"] > ws:
+            ot["old_time"] = time.time()
+            base.log("上传时间到，开始上传",1)
+            rn = cos.upload(cf)
+            if len(rn) == 2:
+                base.log("上传完成",1)
+                ot["old_hash"] = rn[1]
+            config.write(ot,"auto.json")
+            
     
         
