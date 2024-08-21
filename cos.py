@@ -24,7 +24,7 @@ def upload(cf:dict,force=""):
         force = cf["force"]
     base.log("开始上传流程")
     if not force:
-        if base.file_hash(cf["file_path"]) == config.read("auto.json")["old_hash"]:
+        if base.file_hash(cf["file_path"]) == config.read("temp.json")["old_hash"]:
             base.log("文件未改变，不上传")
             return {}
         else:

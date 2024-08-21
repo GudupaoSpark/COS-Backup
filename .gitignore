@@ -164,5 +164,4 @@ cython_debug/
 # Other
 config.json
 key.json
-ac.json
-test.json
+temp.json

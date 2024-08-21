@@ -42,4 +42,4 @@ def dict_to_seconds(time_dict:dict):
     return total_seconds
 
 def conl():
-    return os.path.exists("config.json"),os.path.exists("key.json"),os.path.exists("ac.json")
+    return os.path.exists("config.json"),os.path.exists("key.json"),os.path.exists("temp.json")
